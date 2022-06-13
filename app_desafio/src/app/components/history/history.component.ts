@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/_service/app.service';
 import { DataService } from 'src/app/_service/data.service';
 import { AuthService } from 'src/app/_service/auth.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-history',
@@ -12,7 +13,6 @@ export class HistoryComponent implements OnInit {
 
   date_last_mov: any;
   Movimientos:any;
-  elID:any;
   Banks:any = [];
   balance:any;
   detail_count:any[] = [
@@ -61,9 +61,13 @@ export class HistoryComponent implements OnInit {
 
   get_mov(){
     const user_id = this.authService.getToken();
-    this.elID = user_id;
-    this.crudService.getMov(this.elID).subscribe({
+    this.crudService.getMov(user_id).subscribe({
       next: (resp) => {
+        resp.map(function(val:any, index:any){
+          const fecha = moment(val.mov_fecha);
+          let todayDate = fecha.format('D/M/YYYY');
+          val.mov_fecha = todayDate;
+        })
         this.Movimientos = resp;
       },
       error: (e) => {
@@ -77,11 +81,10 @@ export class HistoryComponent implements OnInit {
 
   getAccountBalance(){
     const user_id = this.authService.getToken();
-    this.elID = user_id;
-    this.crudService.accountBalance(this.elID).subscribe({
+    this.crudService.accountBalance(user_id).subscribe({
       next: (resp) => {
         const balance = resp[0];
-        this.balance = balance[0].usu_saldo;
+        this.balance = balance.usu_saldo;
       },
       error: (e) => {
         console.log(e);

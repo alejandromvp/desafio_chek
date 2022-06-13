@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       const { rut, password } = this.form;
       this.authService.getUserLogin(this.form).subscribe({
         next: (resp) => {
-          if(resp == 0){
+          if(resp.length == 0){
             console.log('usuario no encontrado');
             this.isLoginFailed = true;
           }else{

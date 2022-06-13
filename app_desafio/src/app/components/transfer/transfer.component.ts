@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/_service/app.service';
 import { DataService } from 'src/app/_service/data.service';
+import { AuthService } from 'src/app/_service/auth.service';
 import { FormGroup, FormBuilder, FormsModule, FormControl, Validators } from '@angular/forms';
 import { Observable} from 'rxjs';
 import { map, startWith} from 'rxjs/operators';
@@ -44,6 +45,7 @@ export class TransferComponent implements OnInit {
     public form:FormBuilder,
     private dataService: DataService,
     private crudService: AppService,
+    private authService: AuthService,
     private ruteador:Router
   ){
     this.FormTranf = this.form.group({
@@ -56,9 +58,32 @@ export class TransferComponent implements OnInit {
   get formMonto(): any {return this.FormTranf.get('monto_transf');}
 
  ngOnInit(): void {
+   this.chargeUserId();
    this.getContacts();
    this.fill_array_bank();
    this.getAccountBalance();
+   //console.log(this.FormTranf);
+ }
+
+ chargeUserId(){
+  const user_id = this.authService.getToken();
+  this.elID = user_id;
+ }
+
+ resetForm(){
+  this.formDestinatario.errors.required = false;
+  this.formMonto.errors.required = false;
+}
+
+ clearForm(){
+  this.destinatario.nombre = '';
+  this.destinatario.banco = '';
+  this.destinatario.correo = '';
+  this.destinatario.tipo_cuenta = '';
+  this.destinatario.num_cuenta = '';
+  this.balance = Number(this.balance) - Number(this.FormTranf.value.monto_transf);
+  this.FormTranf.reset();
+  //console.log(this.FormTranf);
  }
 
  MontoElevado(){
@@ -100,7 +125,11 @@ export class TransferComponent implements OnInit {
          confirmButtonText: 'aceptar'
        }).then((result) => {
          if (result.isConfirmed) {
-           location.reload(); 
+           //alert("transferencia exitosa");
+           //this.clearForm();
+           this.getAccountBalance();
+           this.FormTranf.reset();
+           this.resetForm();
          }
        })
         
@@ -141,7 +170,6 @@ export class TransferComponent implements OnInit {
  }
 
  getContacts(){
-   this.elID = 1;
    this.crudService.getContacts(this.elID).subscribe({
      next: (resp) => {
        this.Contactos = resp;
@@ -156,7 +184,6 @@ export class TransferComponent implements OnInit {
  }
 
  getAccountBalance(){
-   this.elID = 1;
    this.crudService.accountBalance(this.elID).subscribe({
      next: (resp) => {
        const balance = resp[0];

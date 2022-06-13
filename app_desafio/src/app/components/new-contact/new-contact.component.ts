@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/_service/data.service';
 import { AppService } from 'src/app/_service/app.service';
 import { AuthService } from 'src/app/_service/auth.service';
-import { FormGroup, FormBuilder, FormsModule, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, FormsModule, FormControl, Validators, AbstractControl } from '@angular/forms';
 import Swal from 'sweetalert2';
+import {  validate, clean, format, getCheckDigit } from 'rut.js'
+
 
 @Component({
   selector: 'app-new-contact',
@@ -15,13 +18,15 @@ export class NewContactComponent implements OnInit {
   obj:any;
   bancos:any;
   emps: any = []; 
+  submitted:boolean = true;
   constructor(public form:FormBuilder,
     private authService: AuthService,
     private dataService: DataService,
+    private router:Router,
     private crudService: AppService) {
       this.FormContact = this.form.group({
         id_user: 1,
-        rut:    new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(10)]),
+        rut:    new FormControl('', [Validators.required]),
         nombre: new FormControl('', Validators.required),
         correo: new FormControl('', Validators.required),
         telefono: new FormControl('', [Validators.required, Validators.min(111111), Validators.max(999999999999)]),
@@ -32,7 +37,8 @@ export class NewContactComponent implements OnInit {
      }
 
      ngOnInit(): void {
-      this.fill_array_bank()
+      this.fill_array_bank();
+      console.log(format('184s853761sdwsds'));
     }
 
     get formRut(): any {return this.FormContact.get('rut');}
@@ -43,16 +49,27 @@ export class NewContactComponent implements OnInit {
     get formTipoCuenta(): any {return this.FormContact.get('tipo_cuenta');}
     get formNumCuenta(): any {return this.FormContact.get('numero_cuenta');}
 
+    get validateRut(): any {return validate(format(this.FormContact.value.rut))}
+
     fill_array_bank(){
       this.dataService.getBanks().subscribe(bank =>{
         this.bancos = bank.banks;
       })
     }
+  
+    resetForm(){
+      this.formRut.errors.required = false;
+      this.formNombre.errors.required = false;
+      this.formCorreo.errors.required = false;
+      this.formTelefono.errors.required = false;
+      this.formBanco.errors.required = false;
+      this.formTipoCuenta.errors.required = false;
+      this.formNumCuenta.errors.required = false;
+    }
 
     onSubmit(): void {
       const user_id = this.authService.getToken();
       this.FormContact.value.id_user = user_id;
-      console.log(this.FormContact.value);
       this.crudService.AddContact(this.FormContact.value).subscribe({
         next: (resp) => {
           Swal.fire({
@@ -64,7 +81,9 @@ export class NewContactComponent implements OnInit {
             confirmButtonText: 'aceptar'
           }).then((result) => {
             if (result.isConfirmed) {
-              location.reload(); 
+              //location.reload(); 
+              this.FormContact.reset();
+              this.resetForm();
             }
           })
         },

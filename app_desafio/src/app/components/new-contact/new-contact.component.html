@@ -9,7 +9,7 @@
                   <div class="box-user">
                     
                     <!-- <form (ngSubmit)="f.form.valid && onSubmit()"  -->
-                        <form (ngSubmit)="f.form.valid && onSubmit()"
+                        <form (ngSubmit)="f.form.valid && onSubmit() && validateRut"
                            #f="ngForm" 
                            [formGroup]="FormContact"
                            novalidate>
@@ -22,12 +22,15 @@
                                 <div *ngIf="formRut.errors != null && formRut.errors.required && f.submitted">
                                     <p class="text-danger fw-normal">Este Campo es requerido</p>
                                 </div>
-                                <div *ngIf="formRut.errors != null && formRut.errors.minlength && f.submitted">
+                                <div *ngIf="formRut.errors != null && !validateRut && f.submitted">
+                                  <p class="text-danger fw-normal">Rut no valido</p>
+                                </div>
+                                <!-- <div *ngIf="formRut.errors != null && formRut.errors.minlength && f.submitted">
                                     <p class="text-danger fw-normal">RUt debe tener un minimo de 8 dijitos</p>
                                 </div>
                                 <div *ngIf="formRut.errors != null && formRut.errors.maxlength && f.submitted">
                                     <p class="text-danger fw-normal">RUt debe tener un minimo de 10 dijitos</p>
-                                </div>
+                                </div> -->
                             </div>
                           </div>
                           <div class="col-lg-6 col-xs-12 col-sm-12">

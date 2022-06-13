@@ -31,8 +31,8 @@ export class AppService {
   }
 
   transfer(datosTransf:any):Observable<any>{
-    const _id = datosTransf.id_user;
-    return this.clienteHttp.post(this.API+'/insertarMov/', datosTransf);
+    //const _id = datosTransf.id_user;
+    return this.clienteHttp.post(this.API+'insertarMov/', datosTransf);
   }
 
 }
