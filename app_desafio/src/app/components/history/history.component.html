@@ -1,0 +1,42 @@
+<div class="container-mov">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    Ultimos movimientos al: {{ date_last_mov }}
+                </div>
+                <div class="card-body">
+                    <div class="box-user">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Nombre destinatario</th>
+                                    <th scope="col">RUT</th>
+                                    <th scope="col">Banco</th>
+                                    <th scope="col">Tipo de cuenta</th>
+                                    <th scope="col">Monto</th>
+                                    <th scope="col">Saldo</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let mov of Movimientos;let iControl=index">
+                                    <tr>
+                                        <td>{{mov.mov_fecha}}</td>
+                                        <td>{{mov.nombre_destino}}</td>
+                                        <td>{{mov.des_rut}}</td>
+                                        <td>{{mov.detalle_banco}}</td>
+                                        <td>{{mov.tipo_cuenta}}</td>
+                                        <td>$-{{mov.mov_monto}}</td>
+                                        <td>${{mov.mov_saldo_restante}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

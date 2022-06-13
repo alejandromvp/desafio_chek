@@ -1,0 +1,29 @@
+<div id="app">
+  <div class="container2" *ngIf="isLoggedIn">          
+      <ul class="sidebar" id="sidebar">
+        <li>
+          <img
+            class="img-fluid"
+            id="profile-img"
+            src="{{'assets/images/svg-logo-replay.svg'}}"
+            width="200"
+            height="50"
+          />
+        </li>
+        <li class="usuario"> ¡Hola {{ username }}! </li>
+        <li (click)="clicked($event)" class="item_menu men_selected" routerLink="home">Inicio</li>
+        <li (click)="clicked($event)" class="item_menu" routerLink="new-contact"><i class="fa fa-dashboard"></i>Nuevo Destinatario</li>
+        <li (click)="clicked($event)" class="item_menu" routerLink="transferencia"><i class="fa fa-dashboard"></i>Transferir</li>
+        <li (click)="clicked($event)" class="item_menu" routerLink="historial" id="xx" >Historial<i class="fa fa-dashboard"></i></li>
+        <li>
+          <button class="btn btn_cerrar_sesion" (click)="logout()">Cerrar sesión</button>
+        </li>  
+      </ul>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+  </div>
+  <div *ngIf="!isLoggedIn">          
+    <router-outlet></router-outlet>
+  </div>
+</div>

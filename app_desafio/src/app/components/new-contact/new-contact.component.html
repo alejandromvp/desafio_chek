@@ -1,0 +1,135 @@
+<div class="container-contact">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <p>Nuevo destinatario</p>
+                </div>
+                <div class="card-body">
+                  <div class="box-user">
+                    
+                    <!-- <form (ngSubmit)="f.form.valid && onSubmit()"  -->
+                        <form (ngSubmit)="f.form.valid && onSubmit()"
+                           #f="ngForm" 
+                           [formGroup]="FormContact"
+                           novalidate>
+                        <!-- 2 column grid layout with text inputs for the first and last names -->
+                        <div class="row mb-4">
+                          <div class="col-lg-6 col-xs-12 col-sm-12">
+                            <div class="form-outline">
+                              <input required type="text" name="rut" formControlName="rut" class="input_login"  minlength="8"  maxlength="10"/>
+                              <label class="label"  for="form6Example1">RUT</label>
+                                <div *ngIf="formRut.errors != null && formRut.errors.required && f.submitted">
+                                    <p class="text-danger fw-normal">Este Campo es requerido</p>
+                                </div>
+                                <div *ngIf="formRut.errors != null && formRut.errors.minlength && f.submitted">
+                                    <p class="text-danger fw-normal">RUt debe tener un minimo de 8 dijitos</p>
+                                </div>
+                                <div *ngIf="formRut.errors != null && formRut.errors.maxlength && f.submitted">
+                                    <p class="text-danger fw-normal">RUt debe tener un minimo de 10 dijitos</p>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-xs-12 col-sm-12">
+                            <div class="form-outline">
+                              <input required type="text" id="form6Example2" formControlName="nombre" class="input_login" />
+                              <label class="label"  for="form6Example2">NOMBRE</label>
+                                <div *ngIf="formNombre.errors != null && formNombre.errors.required && f.submitted">
+                                    <p class="text-danger fw-normal">Este Campo es requerido</p>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      
+                        <div class="row mb-4">
+                            <div class="col-lg-6 col-xs-12 col-sm-12">
+                              <div class="form-outline">
+                                <input required type="email" id="form6Example1" formControlName="correo" class="input_login" email/>
+                                <label class="label" for="form6Example1">CORREO</label>
+                                    <div *ngIf="formCorreo.errors != null && formCorreo.errors.required && f.submitted">
+                                        <p class="text-danger fw-normal">Este Campo es requerido</p>
+                                    </div>
+                                    <div *ngIf="formCorreo.errors != null && formCorreo.errors.email && f.submitted">
+                                        <p class="text-danger fw-normal">Formato de correo no valido</p>
+                                    </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-6 col-xs-12 col-sm-12">
+                              <div class="form-outline">
+                                <input required type="number" id="form6Example2" formControlName="telefono" class="input_login" minlength="6"maxlength="12"/>
+                                <label class="label" for="form6Example2">TELEFONO</label>
+                                    <div *ngIf="formTelefono.errors != null && formTelefono.errors.required && f.submitted">
+                                        <p class="text-danger fw-normal">Este Campo es requerido</p>
+                                    </div>
+                                    <div *ngIf="formTelefono.errors != null && formTelefono.errors.min && f.submitted">
+                                        <p class="text-danger fw-normal">Telefono debe tener un minimo de 6 dijitos</p>
+                                    </div>
+                                    <div *ngIf="formTelefono.errors != null && formTelefono.errors.max && f.submitted">
+                                        <p class="text-danger fw-normal">Telefono debe tener un minimo de 10 dijitos</p>
+                                    </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row mb-4">
+                            <div class="col-lg-6 col-xs-12 col-sm-12">
+                              <div class="form-outline">
+                                <select class="round"  formControlName="banco">
+                                    <option *ngFor="let item of bancos" value="{{item.id}}">{{item.name}}</option>
+                                </select> 
+                                <br>
+                                <label class="label" for="form6Example1">BANCO</label>
+                                <div *ngIf="formBanco.errors != null && formBanco.errors.required && f.submitted">
+                                    <p class="text-danger fw-normal">Este Campo es requerido</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-6 col-xs-12 col-sm-12">
+                              <div class="form-outline">
+                                <select class="round" aria-label="Default select example" formControlName="tipo_cuenta">
+                                    <option value="1">Cuenta vista</option>
+                                    <option value="2">Cuenta corriente</option>
+                                    <option value="3">Cuenta de ahorro</option>
+                                  </select>
+                                  <br>
+                                  <label class="label" for="form6Example2">TIPO DE CUENTA</label>
+                                   <div *ngIf="formTipoCuenta.errors != null && formTipoCuenta.errors.required && f.submitted">
+                                        <p class="text-danger fw-normal">Este Campo es requerido</p>
+                                   </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row mb-4">
+                            <div class="col-lg-6 col-xs-12 col-sm-12">
+                                <div class="form-outline mb-4">
+                                    <input required type="number" formControlName="numero_cuenta" class="input_login"  minlength="5" maxlength="25"/>
+                                    <label class="label" for="form6Example6">NUMERO DE CUENTA</label>
+                                    <div *ngIf="formNumCuenta.errors != null && formNumCuenta.errors.required && f.submitted">
+                                        <p class="text-danger fw-normal">Este Campo es requerido</p>
+                                    </div>
+                                    <div *ngIf="formNumCuenta.errors != null && formNumCuenta.errors.min && f.submitted">
+                                        <p class="text-danger fw-normal">Numero de cuenta debe tener un minimo de 5 dijitos</p>
+                                    </div>
+                                    <div *ngIf="formNumCuenta.errors != null && formNumCuenta.errors.max && f.submitted">
+                                        <p class="text-danger fw-normal">Numero de cuenta debe tener un minimo de 25 dijitos</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xs-12 col-sm-12">
+
+                            </div>
+                          </div>
+
+                          <div class="offset-lg-9 col-lg-3" style="text-align: right;">
+                            <button type="submit" class="btn btn-create-contact">CREAR CONTACTO</button>
+                          </div>
+
+                        <!-- Submit button -->
+                      </form>              
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,108 @@
+.container2{
+    height:100vh;
+    background-color:#F8F8F8;
+    position:relative;
+    }
+    
+    .sidebar {
+    padding-left:0px;
+    }
+    
+    .sidebar li a{
+    text-decoration: none;
+    color:black;
+    }
+    
+    .container2 .sidebar{
+    position:fixed;
+    background-color:#fff;
+    height:100vh;
+    width:200px;
+    z-index:10;
+    box-shadow:0px 15px 30px rgba(0,0,0,0.1);
+    }
+    .sidebar li:nth-child(1){
+    text-align: center;
+    padding: 25px 5px;
+    display: flex;
+    justify-content: center;
+    margin-right: 19px;
+    font-size: 36px;
+    font-weight: 900;
+    font-style: italic;
+    font-family: emoji;
+    padding-top:30px;
+    }
+    
+    
+    .sidebar .item_menu:hover:nth-child(1){
+    padding:30px 0px;
+    background-color:transparent;
+    color:#000;
+    }
+    
+    .sidebar li{
+    padding:25px;
+    cursor:pointer;
+    transition:all 0.5s;
+    letter-spacing:1px;
+    display:flex;
+    align-items:center;
+    }
+    
+    .sidebar li span:nth-child(1){
+    font-size:20px;
+    }
+    
+    .sidebar li span:nth-child(2){
+    font-size:16px;
+    }
+    
+    .sidebar .item_menu:hover{
+    background-color:rgba(244,240,249);
+    padding:25px;
+    color:black;
+    transition:all 0.5s; 
+    }
+    .men_selected{
+    background-color:rgba(244,240,249);
+    padding:25px;
+    color:black;
+    transition:all 0.5s;
+    }
+    .item_menu li:focus{
+    background-color:rgba(244,240,249);
+    color:black;
+    transition:all 0.5s;
+    }
+    .container2 .content{
+    padding-left:200px;
+    }
+    
+    .usuario{
+    color:#4F2C80 !important;
+    font-weight: bold;
+    }
+    
+    .btn_cerrar_sesion{
+    color: #4F2C80 !important;
+    font-size: 14px;
+    color:white;
+    font-weight: 600;
+    border-radius: 15px;
+    background-color:rgba(244,240,249);
+    padding-left: 30px;
+    padding-right:30px;
+    }
+    
+    .btn_cerrar_sesion:hover{
+        color: #4F2C80 !important;
+        font-size: 14px;
+        color:white;
+        font-weight: 600;
+        border-radius: 15px;
+        background-color:rgba(244,240,249);
+        padding-left: 30px;
+        padding-right:30px;
+        box-shadow: 0px 0px 2px 0.6px  #5e4186;
+        }

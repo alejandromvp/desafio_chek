@@ -1,0 +1,22 @@
+.container-mov{
+padding:0px;
+}
+
+.card-header{
+background-color: rgba(244,240,249);
+font-weight: 500;
+min-height: 72px;
+display:flex;
+align-items:center;
+color:#4F2C80;
+font-size: 18px;
+}
+.card-body {
+height:100vh;
+padding:20px;
+}
+.box-user{
+border:2px solid #bcbbbd;
+padding:20px;
+border-radius: 10px;
+}
