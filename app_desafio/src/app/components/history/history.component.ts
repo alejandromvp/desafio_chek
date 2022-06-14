@@ -64,11 +64,6 @@ export class HistoryComponent implements OnInit {
     const user_id = this.authService.getToken();
     this.crudService.getMov(user_id).subscribe({
       next: (resp) => {
-        /* resp.map(function(val:any, index:any){
-          const fecha = moment(val.mov_fecha);
-          let todayDate = fecha.format('D/M/YYYY');
-          val.mov_fecha = todayDate;
-        }) */
         resp.forEach(function (value:any) {
           const fecha = moment(value.mov_fecha);
           let todayDate = fecha.format('D/M/YYYY');
@@ -120,6 +115,6 @@ export class HistoryComponent implements OnInit {
     splitNum[0] = splitNum[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousands_point);
     number = splitNum.join(dec_point);
     return number;
-}
+  }
 
 }

@@ -21,7 +21,7 @@ export class TransferComponent implements OnInit {
   Banks:any = [];
   balance:any;
   data_transferencia:any ={
-    id_user: 1,
+    id_user: '',
     des_id:'',
     mov_monto: '',
     saldo_restante: '',

@@ -4,11 +4,7 @@ import { Observable } from 'rxjs';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 
-      
 @Injectable({
   providedIn: 'root'
 })

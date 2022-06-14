@@ -17,20 +17,14 @@
                         <div class="row mb-4">
                           <div class="col-lg-6 col-xs-12 col-sm-12">
                             <div class="form-outline">
-                              <input required type="text" (input)="keyxd()" name="rut" formControlName="rut" class="input_login" minlength="11" maxlength="12" />
+                              <input required type="text" (input)="formatRut()" name="rut" formControlName="rut" class="input_login" minlength="11" maxlength="12" />
                               <label class="label"  for="form6Example1">RUT</label>
                                 <div *ngIf="formRut.errors != null && formRut.errors.required && f.submitted">
                                     <p class="text-danger fw-normal">Este Campo es requerido</p>
                                 </div>
-                                <!-- <div *ngIf="formRut.errors != null && !validateRut && f.submitted">
-                                  <p class="text-danger fw-normal">Rut no valido</p>
-                                </div> -->
                                  <div *ngIf="formRut.errors != null && formRut.errors.minlength && f.submitted">
                                     <p class="text-danger fw-normal">RUt debe tener un minimo de 8 dijitos</p>
                                 </div>
-                                <!-- <div *ngIf="formRut.errors != null && formRut.errors.maxlength && f.submitted">
-                                    <p class="text-danger fw-normal">RUt debe tener un minimo de 10 dijitos</p>
-                                </div> -->
                             </div>
                           </div>
                           <div class="col-lg-6 col-xs-12 col-sm-12">

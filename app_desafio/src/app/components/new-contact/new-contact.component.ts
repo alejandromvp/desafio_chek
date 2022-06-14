@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/_service/data.service';
 import { AppService } from 'src/app/_service/app.service';
 import { AuthService } from 'src/app/_service/auth.service';
-import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormsModule, FormControl, Validators, AbstractControl } from '@angular/forms';
 import Swal from 'sweetalert2';
 import {  validate, clean, format, getCheckDigit } from 'rut.js'
@@ -22,7 +21,6 @@ export class NewContactComponent implements OnInit {
   constructor(public form:FormBuilder,
     private authService: AuthService,
     private dataService: DataService,
-    private router:Router,
     private crudService: AppService) {
       this.FormContact = this.form.group({
         id_user: 1,
@@ -38,7 +36,6 @@ export class NewContactComponent implements OnInit {
 
     ngOnInit(): void {
       this.fill_array_bank();
-      console.log(format('184s853761sdwsds'));
     }
 
     get formRut(): any {return (this.FormContact.get('rut'))}
@@ -66,16 +63,14 @@ export class NewContactComponent implements OnInit {
       } else {
         let valor = format(clean(this.FormContact.value.rut));
         console.log(this.FormContact.controls['rut'].value);
-        //this.FormContact.value.rut = valor; 
         this.FormContact.controls['rut'].setValue(valor);
         return true;
       }
     }
 
-    keyxd(){
+    formatRut(){
       let valor = format(clean(this.FormContact.value.rut));
         console.log(this.FormContact.controls['rut'].value);
-        //this.FormContact.value.rut = valor; 
         this.FormContact.controls['rut'].setValue(valor);
     }
 

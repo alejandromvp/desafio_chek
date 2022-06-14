@@ -8,8 +8,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private roles: string[] = [];
-  div?: any;
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
@@ -39,7 +37,7 @@ export class AppComponent {
         slide.classList.remove('men_selected');
       }
     }
-    event.target.classList.add('men_selected'); // To ADD
+    event.target.classList.add('men_selected');
   }
 
   logout(): void {
