@@ -9,7 +9,7 @@
                   <div class="box-user">
                     
                     <!-- <form (ngSubmit)="f.form.valid && onSubmit()"  -->
-                        <form (ngSubmit)="f.form.valid && onSubmit() && validateRut"
+                        <form (ngSubmit)="f.form.valid && onSubmit()"
                            #f="ngForm" 
                            [formGroup]="FormContact"
                            novalidate>
@@ -17,18 +17,18 @@
                         <div class="row mb-4">
                           <div class="col-lg-6 col-xs-12 col-sm-12">
                             <div class="form-outline">
-                              <input required type="text" name="rut" formControlName="rut" class="input_login"  minlength="8"  maxlength="10"/>
+                              <input required type="text" (input)="keyxd()" name="rut" formControlName="rut" class="input_login" minlength="11" maxlength="12" />
                               <label class="label"  for="form6Example1">RUT</label>
                                 <div *ngIf="formRut.errors != null && formRut.errors.required && f.submitted">
                                     <p class="text-danger fw-normal">Este Campo es requerido</p>
                                 </div>
-                                <div *ngIf="formRut.errors != null && !validateRut && f.submitted">
+                                <!-- <div *ngIf="formRut.errors != null && !validateRut && f.submitted">
                                   <p class="text-danger fw-normal">Rut no valido</p>
-                                </div>
-                                <!-- <div *ngIf="formRut.errors != null && formRut.errors.minlength && f.submitted">
+                                </div> -->
+                                 <div *ngIf="formRut.errors != null && formRut.errors.minlength && f.submitted">
                                     <p class="text-danger fw-normal">RUt debe tener un minimo de 8 dijitos</p>
                                 </div>
-                                <div *ngIf="formRut.errors != null && formRut.errors.maxlength && f.submitted">
+                                <!-- <div *ngIf="formRut.errors != null && formRut.errors.maxlength && f.submitted">
                                     <p class="text-danger fw-normal">RUt debe tener un minimo de 10 dijitos</p>
                                 </div> -->
                             </div>
@@ -59,7 +59,7 @@
                             </div>
                             <div class="col-lg-6 col-xs-12 col-sm-12">
                               <div class="form-outline">
-                                <input required type="number" id="form6Example2" formControlName="telefono" class="input_login" minlength="6"maxlength="12"/>
+                                <input required type="number" (keypress)="keyPressNumbers($event)" id="form6Example2" formControlName="telefono" class="input_login" minlength="6"maxlength="12"/>
                                 <label class="label" for="form6Example2">TELEFONO</label>
                                     <div *ngIf="formTelefono.errors != null && formTelefono.errors.required && f.submitted">
                                         <p class="text-danger fw-normal">Este Campo es requerido</p>
@@ -105,7 +105,7 @@
                           <div class="row mb-4">
                             <div class="col-lg-6 col-xs-12 col-sm-12">
                                 <div class="form-outline mb-4">
-                                    <input required type="number" formControlName="numero_cuenta" class="input_login"  minlength="5" maxlength="25"/>
+                                    <input required type="text" (keypress)="keyPressNumbers($event)" formControlName="numero_cuenta" class="input_login"  minlength="5" maxlength="25"/>
                                     <label class="label" for="form6Example6">NUMERO DE CUENTA</label>
                                     <div *ngIf="formNumCuenta.errors != null && formNumCuenta.errors.required && f.submitted">
                                         <p class="text-danger fw-normal">Este Campo es requerido</p>

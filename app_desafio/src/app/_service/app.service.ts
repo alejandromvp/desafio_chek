@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AppService {
-  //API: String = 'https://gentle-mountain-84308.herokuapp.com/'
-   API: String = 'http://localhost:3050/';
+  API: String = 'https://gentle-mountain-84308.herokuapp.com/';
+   //API: String = 'http://localhost:3050/';
   constructor(private clienteHttp:HttpClient) { }
 
   getMov(id:any):Observable<any>{
@@ -31,8 +31,7 @@ export class AppService {
   }
 
   transfer(datosTransf:any):Observable<any>{
-    //const _id = datosTransf.id_user;
-    return this.clienteHttp.post(this.API+'insertarMov/', datosTransf);
+    return this.clienteHttp.post(this.API+'insertarMov', datosTransf);
   }
 
 }

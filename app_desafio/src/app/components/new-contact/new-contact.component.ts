@@ -26,7 +26,7 @@ export class NewContactComponent implements OnInit {
     private crudService: AppService) {
       this.FormContact = this.form.group({
         id_user: 1,
-        rut:    new FormControl('', [Validators.required]),
+        rut:    new FormControl('', [Validators.required, Validators.minLength(11)]),
         nombre: new FormControl('', Validators.required),
         correo: new FormControl('', Validators.required),
         telefono: new FormControl('', [Validators.required, Validators.min(111111), Validators.max(999999999999)]),
@@ -36,12 +36,12 @@ export class NewContactComponent implements OnInit {
       })
      }
 
-     ngOnInit(): void {
+    ngOnInit(): void {
       this.fill_array_bank();
       console.log(format('184s853761sdwsds'));
     }
 
-    get formRut(): any {return this.FormContact.get('rut');}
+    get formRut(): any {return (this.FormContact.get('rut'))}
     get formNombre(): any {return this.FormContact.get('nombre');}
     get formCorreo(): any {return this.FormContact.get('correo');}
     get formTelefono(): any {return this.FormContact.get('telefono');}
@@ -57,6 +57,28 @@ export class NewContactComponent implements OnInit {
       })
     }
   
+    keyPressNumbers(event:any) {
+      var charCode = (event.which) ? event.which : event.keyCode;
+      // Only Numbers 0-9
+      if ((charCode < 48 || charCode > 57)) {
+        event.preventDefault();
+        return false;
+      } else {
+        let valor = format(clean(this.FormContact.value.rut));
+        console.log(this.FormContact.controls['rut'].value);
+        //this.FormContact.value.rut = valor; 
+        this.FormContact.controls['rut'].setValue(valor);
+        return true;
+      }
+    }
+
+    keyxd(){
+      let valor = format(clean(this.FormContact.value.rut));
+        console.log(this.FormContact.controls['rut'].value);
+        //this.FormContact.value.rut = valor; 
+        this.FormContact.controls['rut'].setValue(valor);
+    }
+
     resetForm(){
       this.formRut.errors.required = false;
       this.formNombre.errors.required = false;
@@ -95,7 +117,10 @@ export class NewContactComponent implements OnInit {
         }
      })
    }
-  
+
+   keyPressrut(event:any){
+    console.log(event)
+   }
   
   }
   

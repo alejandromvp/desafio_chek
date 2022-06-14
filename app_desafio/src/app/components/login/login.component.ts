@@ -5,9 +5,9 @@ import { Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-login',
+  selector:    'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls:  ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   form: any = {
@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
       if (this.authService.getToken()) {
         this.isLoggedIn = true;
         this.ruteador.navigateByUrl('home');
-        //this.roles = this.tokenStorage.getUser().roles;
       }
     }
 
@@ -65,15 +64,6 @@ export class LoginComponent implements OnInit {
           //console.log('done');
         }
       });
-      /* if(rut == '18485376-0' && password == '123456'){
-        this.isLoggedIn = true;
-        this.isLoginFailed = false;
-        this.authService.saveUser(this.User);
-        this.authService.saveToken('fwh7yhf723bfuwbfwvhw8fh8w');
-        window.location.reload();
-      }else{
-        this.isLoginFailed = true;
-      } */
     }
   
     reloadPage(): void {

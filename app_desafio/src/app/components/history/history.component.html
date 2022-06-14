@@ -27,8 +27,8 @@
                                         <td>{{mov.des_rut}}</td>
                                         <td>{{mov.detalle_banco}}</td>
                                         <td>{{mov.tipo_cuenta}}</td>
-                                        <td>$-{{mov.mov_monto}}</td>
-                                        <td>${{mov.mov_saldo_restante}}</td>
+                                        <td>$-{{number_format_js(mov.mov_monto, 0, 0, 0)}}</td>
+                                        <td>${{number_format_js(mov.mov_saldo_restante, 0, 0, 0)}}</td>
                                     </tr>
                                 </tbody>
                             </table>

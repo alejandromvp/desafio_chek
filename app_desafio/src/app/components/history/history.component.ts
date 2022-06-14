@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { AppService } from 'src/app/_service/app.service';
 import { DataService } from 'src/app/_service/data.service';
 import { AuthService } from 'src/app/_service/auth.service';
 import * as moment from 'moment';
+import {formatNumber} from '@angular/common';
 
 @Component({
   selector: 'app-history',
@@ -63,11 +64,16 @@ export class HistoryComponent implements OnInit {
     const user_id = this.authService.getToken();
     this.crudService.getMov(user_id).subscribe({
       next: (resp) => {
-        resp.map(function(val:any, index:any){
+        /* resp.map(function(val:any, index:any){
           const fecha = moment(val.mov_fecha);
           let todayDate = fecha.format('D/M/YYYY');
           val.mov_fecha = todayDate;
-        })
+        }) */
+        resp.forEach(function (value:any) {
+          const fecha = moment(value.mov_fecha);
+          let todayDate = fecha.format('D/M/YYYY');
+          value.mov_fecha = todayDate;
+        }); 
         this.Movimientos = resp;
       },
       error: (e) => {
@@ -94,5 +100,26 @@ export class HistoryComponent implements OnInit {
       }
     });
   }
+
+  number_format_js(number:any, decimals:any, dec_point:any, thousands_point:any) {
+    if (number == null || !isFinite(number)) {
+        throw new TypeError("number is not valid");
+    }
+
+    if (!decimals) {
+        var len = number.toString().split('.').length;
+        decimals = len > 1 ? len : 0;
+    }
+
+    if (!dec_point) { dec_point = ','; }
+    if (!thousands_point) { thousands_point = '.'; }
+
+    number = parseFloat(number).toFixed(decimals);
+    number = number.replace(".", dec_point);
+    let splitNum = number.split(dec_point);
+    splitNum[0] = splitNum[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousands_point);
+    number = splitNum.join(dec_point);
+    return number;
+}
 
 }

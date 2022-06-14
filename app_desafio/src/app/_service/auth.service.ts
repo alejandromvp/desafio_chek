@@ -14,8 +14,8 @@ const httpOptions = {
 })
 export class AuthService {
   user : any;
-  API: String = 'http://localhost:3050/';
-  //API: String = 'https://gentle-mountain-84308.herokuapp.com/';
+  //API: String = 'http://localhost:3050/';
+  API: String = 'https://gentle-mountain-84308.herokuapp.com/';
   constructor(
     private http: HttpClient
   ) { }
